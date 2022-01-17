@@ -1,0 +1,124 @@
+* {
+  font-size: 20px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+h1 {
+  color: blue;
+  font-size: 2rem;
+  margin: 0;
+}
+h2 {
+  color: blue;
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+button {
+  background-color: lightgreen;
+  cursor: pointer;
+  margin: 0.5rem;
+  max-width: 100px;
+}
+input {
+  background-color: lightgreen;
+  border: none;
+  border-radius: 4px;
+  color: black;
+  cursor: pointer;
+  margin: 8px 0;
+  padding: 14px 20px;
+  width: 80%;
+}
+
+header {
+  align-items: center;
+  display: flex;
+}
+
+i {
+  color: green;
+  font-size: 2rem !important;
+  margin-left: 2rem;
+}
+
+.container {
+  background-color: #ddd;
+  margin: 2rem auto;
+  padding: 2rem;
+  max-width: 1000px;
+}
+
+.page__container {
+  height: 60vh;
+}
+
+.form__container {
+  align-items: center;
+  border: 2px solid blue;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  max-width: 800px;
+  padding: 2rem;
+}
+
+.itemList {
+  display: flex;
+  flex-wrap: wrap;
+  height: 10rem;
+}
+
+.itemList p {
+  margin: 10px;
+}
+
+.popularItem-section {
+  display: flex;
+  justify-content: space-between;
+  max-width: 200px;
+}
+
+.itemRemoved {
+  text-decoration: line-through;
+}
+
+.warning__container {
+  height: 1rem;
+}
+
+.warning {
+  color: red;
+}
+
+.nav-list,
+.footer {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.nav-list li,
+.footer li {
+  background-color: blue;
+  border-radius: 8px;
+  color: white;
+  height: 1.5rem;
+  list-style-type: none;
+  margin: 0.5rem;
+  text-align: center;
+  width: 6rem;
+}
+
+.social-list {
+  display: flex;
+}
+
+.page-image {
+  max-width: 300px;
+}
+
+.item-name-selected {
+  text-decoration: line-through;
+}
