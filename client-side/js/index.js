@@ -65,7 +65,6 @@ function retrievePopularItems() {
 }
 
 function addItemsToGroceryList(user) {
-  console.log('UZER', user);
   const name = user.userName
   app.addEventListener('click', (event) => {
     if (event.target.classList.contains('add-item__submit')) {
