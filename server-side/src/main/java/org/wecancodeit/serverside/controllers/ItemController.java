@@ -3,7 +3,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.web.bind.annotation.*;
 import org.wecancodeit.serverside.models.Item;
+import org.wecancodeit.serverside.models.User;
 import org.wecancodeit.serverside.repositories.ItemRepository;
+import org.wecancodeit.serverside.repositories.UserRepository;
 
 import javax.annotation.Resource;
 import java.util.Collection;
@@ -16,23 +18,30 @@ public class ItemController {
     @Resource
     private ItemRepository itemRepo;
 
-    @GetMapping("/api/items")
-    public Collection<Item> getItems() {
-        return (Collection<Item>) itemRepo.findAll();
+    @Resource
+    private UserRepository userRepo;
+
+    @GetMapping("/api/{userName}/items")
+    public Collection<Item> getItems(@PathVariable String userName) {
+        Optional<User> user = userRepo.findByUserName(userName);
+        return user.get().getItems();
     }
 
-    @PostMapping("/api/items/add-item")
-    public Collection<Item> addItem(@RequestBody String body) throws JSONException {
+    @PostMapping("/api/{userName}/items/add-item")
+    public Collection<Item> addItem(@PathVariable String userName, @RequestBody String body) throws JSONException {
         JSONObject newItem = new JSONObject(body);
         String itemName = newItem.getString("name");
         boolean itemIsSelected = newItem.getBoolean("isSelected");
         Optional<Item> itemToAddOpt = itemRepo.findByName(itemName);
         //add item if not already in the database
+        Optional<User> user = userRepo.findByUserName(userName);
         if (itemToAddOpt.isEmpty()) {
             Item itemToAdd = new Item(itemName, itemIsSelected);
             itemRepo.save(itemToAdd);
+            user.get().addItem(itemToAdd);
+            userRepo.save(user.get());
         }
-        return (Collection<Item>) itemRepo.findAll();
+        return user.get().getItems();
     }
 
     @PutMapping ("/api/items/{id}/select-item")

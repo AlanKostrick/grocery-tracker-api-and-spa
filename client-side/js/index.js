@@ -16,11 +16,12 @@ function buildPage() {
   navContact();
   navHome();
   retrievePopularItems();
-  retrieveItems();
-  addItemsToGroceryList();
+  // retrieveItems();
+  //addItemsToGroceryList();
   addPopularItemToGroceryList();
   selectItemOnGroceryList();
   removeItemFromGroceryList();
+  renderAccountInfo();
 }
 
 function header() {
@@ -49,12 +50,12 @@ function navHome() {
   });
 }
 
-function retrieveItems() {
-  const itemsSection = document.querySelector('.itemList');
-  apiHelpers.getRequest('http://localhost:8080/api/items', (items) => {
-    itemsSection.innerHTML = Items(items);
-  });
-}
+// function retrieveItems(userName) {
+//   const itemsSection = document.querySelector('.itemList');
+//   apiHelpers.getRequest(`http://localhost:8080/api/${userName}/items`, (items) => {
+//     itemsSection.innerHTML = Items(items);
+//   });
+// }
 
 function retrievePopularItems() {
   const popularItemsSection = document.querySelector('.popularItems');
@@ -63,16 +64,18 @@ function retrievePopularItems() {
   });
 }
 
-function addItemsToGroceryList() {
+function addItemsToGroceryList(user) {
+  console.log('UZER', user);
+  const name = user.userName
   app.addEventListener('click', (event) => {
     if (event.target.classList.contains('add-item__submit')) {
       const itemName = event.target.parentElement.querySelector('.add-item__name').value;
-      apiHelpers.postRequest('http://localhost:8080/api/items/add-item',
+      apiHelpers.postRequest(`http://localhost:8080/api/${name}/items/add-item`,
         {
           name: itemName,
           isSelected: false
         },
-        (items) => (app.innerHTML = Home(items)));
+        (items) => (app.innerHTML = Home(items, user)));
     }
   });
 }
@@ -117,4 +120,25 @@ function removeItemFromGroceryList() {
       });
     }
   });
+}
+
+function renderAccountInfo() {
+  const loginSubmit = document.querySelector('.loginSubmit');
+  loginSubmit.addEventListener('click', (event) => {
+    if (event.target.parentElement.classList.contains('loginForm')) {
+      const name = event.target.parentElement.querySelector('.loginName').value;
+      //from here instead of logging, you can send the user to the Account page and get the user's information, 
+      //note this will only be possible for a user that is stored in your populator otherwise you will get null
+      apiHelpers.getRequest(`http://localhost:8080/api/users/${name}`, (user) => {
+        console.log(user);
+        if (user) {
+          apiHelpers.getRequest(`http://localhost:8080/api/${name}/items`, (items) => {
+            app.innerHTML = Home(items, user);
+          });
+          addItemsToGroceryList(user);
+        }
+      });
+
+    }
+  })
 }
