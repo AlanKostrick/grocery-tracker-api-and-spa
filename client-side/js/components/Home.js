@@ -9,10 +9,11 @@ apiHelpers.getRequest('http://localhost:8080/api/popular-items', (popularItems) 
 });
 
 
-export default function Home(items) {
+export default function Home(items, user) {
   return `
   <div class='page__container'>
     <div class='form__container'>
+       <p>${user.userName} 's list</p>
         <input  class='add-item__name' type='text' placeholder='Enter item'>
         <button class='add-item__submit'>Submit</button>
         <section class='itemList'>
