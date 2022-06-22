@@ -1,0 +1,27 @@
+
+  
+  .form__container {
+    align-items: center;
+    border: 2px solid blue;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    max-width: 800px;
+    padding: 2rem;
+  }
+  
+  .itemList {
+    display: flex;
+    flex-wrap: wrap;
+    height: 10rem;
+  }
+  
+  .warning__container {
+    height: 1rem;
+  }
+  
+  .warning {
+    color: red;
+  }
+  

@@ -1,0 +1,38 @@
+
+.itemForm {
+    display: flex;
+    flex-direction: column;
+
+    & input {
+        background-color: lightgreen;
+        border: 2px solid blue;
+        border-radius: 8px;
+        margin: 5px;
+        padding: 10px;
+    }
+
+    & button {
+        border-radius: 4px;
+    }
+}
+
+
+.itemsContainer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    & p{
+        margin: 2px;
+    }
+}
+
+.itemContainer {
+   button {
+       border-radius: 4px;
+       margin: 0 10px;
+    }
+}
+
+.selected {
+    text-decoration: line-through;
+}

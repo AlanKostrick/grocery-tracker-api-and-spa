@@ -1,0 +1,19 @@
+
+h2 {
+    margin: 0 50px;
+}
+
+.popularItemsList{
+    display: flex;
+
+
+}
+
+.popularItemDataContainer{
+    display: flex;
+    margin: 0 25px;
+
+    & p {
+        padding: 0 5px;
+    }
+}
